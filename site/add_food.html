@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<head>
+  <title>TreatTrackr &mdash; Add Food</title>
+
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="css/add_food.css" type="text/css" />
+
+</head>
+
+<body>
+</body>
+
+<nav class="navbar navbar-inverse" role="navigation">
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">TreatTrackr</a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Add Food</a></li>
+        <li><a href="#">Data</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="content">
+
+  <div class="food-adder">
+
+    <div class="food-adder-drawer food-adder-component">
+      <div class="food-adder-section">
+        <h3>Add Food</h3>
+        <div class="food-adder-img-holder">
+          <img src="img/koala.jpg" />
+        </div>
+
+        <div class="food-adder-form-holder">
+          <form action="#">
+            <input class="food-adder-input form-control input-sm" type="text" placeholder="Food" />
+            <input class="food-adder-input form-control input-sm" type="text" placeholder="Quantity" />
+            <input class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
+            <input class="food-adder-input form-control input-sm" type="text" placeholder="Date" />
+            <button type="submit" class="btn btn-success food-adder-submit">Add!</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="food-adder-divider"></div>
+
+      <div class="food-adder-section">
+        <h3>Add Exercise</h3>
+        <div class="food-adder-img-holder">
+          <img src="img/koala.jpg" />
+        </div>
+
+        <div class="food-adder-form-holder">
+          <form action="#">
+            <input class="food-adder-input form-control input-sm" type="text" placeholder="Exercise" />
+            <input class="food-adder-input form-control input-sm" type="text" placeholder="Duration" />
+            <input class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
+            <input class="food-adder-input form-control input-sm" type="text" placeholder="Date" />
+            <button type="submit" class="btn btn-success food-adder-submit">Add!</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="food-adder-list food-adder-component">
+      <div class="food-add-list-nav">
+        <!-- date stuff -->
+        <a href="#" class="left-nav">&lt;</a>
+        <h1>Today</h1>
+        <a href="#" class="right-nav">&gt;</a>
+      <div>
+
+      <div class="food-adder-list-table-holder">
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Food</th>
+              <th>Calories</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="food-adder-list-row">
+              <td class="img-cell"><img src="img/koala.jpg"/></td>
+              <td>Koala Bear</td>
+              <td>100</td>
+              <td>
+                <button type="button" class="btn btn-danger btn-xs">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+  </div>
+
+</div>
+
+</html>
