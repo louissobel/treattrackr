@@ -7,6 +7,20 @@
   <script type="text/javascript" src="js/vendor/underscore.js" ></script>
   <script type="text/javascript" src="js/vendor/backbone.js" ></script>
 
+  <!-- models -->
+  <script type="text/javascript" src="js/models/consumed_item.js"></script>
+  <script type="text/javascript" src="js/models/consumed_item_collection.js"></script>
+
+  <!-- views -->
+  <script type="text/javascript" src="js/views/consumed_item_table.js"></script>
+  <script type="text/javascript" src="js/views/add_food_view.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      window.fav = new FoodAdderView();
+    });
+  </script>
+
   <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
   <link rel="stylesheet" href="css/add_food.css" type="text/css" />
 
@@ -92,6 +106,7 @@
           </thead>
 
           <tbody>
+            <script type="text/template" id="food-list-row-template">
             <tr class="food-adder-list-row">
               <td class="img-cell"><img src="img/koala.jpg"/></td>
               <td>Koala Bear</td>
@@ -102,6 +117,7 @@
                 </button>
               </td>
             </tr>
+            </script>
           </tbody>
 
         </table>
