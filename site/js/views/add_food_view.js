@@ -22,6 +22,7 @@ var FoodAdderView = Backbone.View.extend({
     e.preventDefault();
     this.consumedItems.add({
       name: "Koala Bear " + this.consumedItems.length
+    , calories: 100 * (Math.pow(3, this.consumedItems.length) % 7)
     })
   }
 });
