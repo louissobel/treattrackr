@@ -5,7 +5,7 @@ var FoodAdderView = Backbone.View.extend({
   el: '.food-adder'
 
 , events: {
-    "click .food-adder-submit": "addNewFood"
+    "click .food-adder-submit": "addNewFood",
   }
 
 , initialize: function () {
@@ -23,6 +23,7 @@ var FoodAdderView = Backbone.View.extend({
     this.consumedItems.add({
       name: "Koala Bear " + this.consumedItems.length
     , calories: 100 * (Math.pow(3, this.consumedItems.length) % 7)
+    , id: this.consumedItems.length
     })
   }
 });

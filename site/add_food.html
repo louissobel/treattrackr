@@ -107,12 +107,12 @@
 
           <tbody>
             <script type="text/template" id="food-list-row-template">
-            <tr class="food-adder-list-row">
+            <tr class="food-adder-list-row" data-food-item-id="<%= id %>">
               <td class="img-cell"><img src="<%= img_url %>"/></td>
               <td><%= name %></td>
               <td><%= calories %></td>
               <td>
-                <button type="button" class="btn btn-danger btn-xs">
+                <button type="button" class="btn btn-danger btn-xs food-list-delete-item">
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>
               </td>
