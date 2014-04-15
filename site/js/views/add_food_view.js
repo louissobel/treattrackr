@@ -1,12 +1,14 @@
 /* View for FoodAdder */
 
+var consumableItems = new ConsumableItemCollection();
+consumableItems.add({
+  name: 'Pizza',
+  calories: 100,
+});
+
 var FoodAdderView = Backbone.View.extend({
   
   el: '.food-adder'
-
-, events: {
-    "click .food-adder-submit": "addNewFood",
-  }
 
 , initialize: function () {
     // Really, it would be a model that new about the current
@@ -15,15 +17,28 @@ var FoodAdderView = Backbone.View.extend({
     this.consumedItemTable = new ConsumedItemTable({
       model: this.consumedItems
     });
+
+    // Two ItemAdders, one for food, one for exercise
+    $('.food-adder-section').each(function (i, e) {
+      var itemType = $(e).data('itemType')
+        , ia = new ItemAdder({
+            el: e
+          , itemType: $(e).data('itemType')
+          })
+        ;
+      this.listenTo(ia, "newItem", this.itemAdded)
+
+      if ($(e).data('itemType') == 'food') {
+        this.foodAdder = ia;
+      } else {
+        this.exerciseAdder = ia;
+      }
+    }.bind(this));
+
   }
 
 
-, addNewFood: function (e) {
-    e.preventDefault();
-    this.consumedItems.add({
-      name: "Koala Bear " + this.consumedItems.length
-    , calories: 100 * (Math.pow(3, this.consumedItems.length) % 7)
-    , id: this.consumedItems.length
-    })
+, itemAdded: function (itemType, item) {
+    this.consumedItems.add(item);
   }
 });

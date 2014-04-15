@@ -11,8 +11,12 @@
   <script type="text/javascript" src="js/models/consumed_item.js"></script>
   <script type="text/javascript" src="js/models/consumed_item_collection.js"></script>
 
+  <script type="text/javascript" src="js/models/consumable_item.js"></script>
+  <script type="text/javascript" src="js/models/consumable_item_collection.js"></script>
+
   <!-- views -->
   <script type="text/javascript" src="js/views/consumed_item_table.js"></script>
+  <script type="text/javascript" src="js/views/item_adder.js"></script>
   <script type="text/javascript" src="js/views/add_food_view.js"></script>
 
   <script type="text/javascript">
@@ -48,7 +52,7 @@
   <div class="food-adder">
 
     <div class="food-adder-drawer food-adder-component">
-      <div class="food-adder-section">
+      <div class="food-adder-section" data-item-type="food">
         <h3>Add Food</h3>
         <div class="food-adder-img-holder">
           <img src="img/cupcake.png" />
@@ -56,16 +60,16 @@
 
         <div class="food-adder-form-holder">
           <form action="#">
-            <input class="food-adder-input form-control input-sm" type="text" placeholder="Food" />
-            <input class="food-adder-input form-control input-sm" type="text" placeholder="Quantity" />
-            <input class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
-            <input class="food-adder-input form-control input-sm" type="text" placeholder="Date" />
+            <input name="name" class="food-adder-input form-control input-sm" type="text" placeholder="Food" />
+            <input name="quantity" class="food-adder-input form-control input-sm" type="text" placeholder="Quantity" />
+            <input name="calories" class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
+            <input name="date" class="food-adder-input form-control input-sm" type="text" placeholder="Date" />
             <button type="submit" class="btn btn-success food-adder-submit">Add!</button>
           </form>
         </div>
       </div>
 
-      <div class="food-adder-divider"></div>
+      <div class="food-adder-divider" data-item-type="exercise"></div>
 
       <div class="food-adder-section">
         <h3>Add Exercise</h3>
@@ -75,10 +79,10 @@
 
         <div class="food-adder-form-holder">
           <form action="#">
-            <input class="food-adder-input form-control input-sm" type="text" placeholder="Exercise" />
-            <input class="food-adder-input form-control input-sm" type="text" placeholder="Duration" />
-            <input class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
-            <input class="food-adder-input form-control input-sm" type="text" placeholder="Date" />
+            <input name="name" class="food-adder-input form-control input-sm" type="text" placeholder="Exercise" />
+            <input name="duration" class="food-adder-input form-control input-sm" type="text" placeholder="Duration" />
+            <input name="calories" class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
+            <input name="date" class="food-adder-input form-control input-sm" type="text" placeholder="Date" />
             <button type="submit" class="btn btn-success food-adder-submit">Add!</button>
           </form>
         </div>
@@ -107,7 +111,7 @@
 
           <tbody>
             <script type="text/template" id="food-list-row-template">
-            <tr class="food-adder-list-row" data-food-item-id="<%= id %>">
+            <tr class="food-adder-list-row" data-food-item-id="<%= cid %>">
               <td class="img-cell"><img src="<%= img_url %>"/></td>
               <td><%= name %></td>
               <td><%= calories %></td>

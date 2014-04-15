@@ -13,12 +13,15 @@ var ConsumedItemTable = Backbone.View.extend({
   }
 
 , itemAdded: function (e) {
-    var row = this.rowTemplate(e.toJSON());
+    var templateData = e.toJSON();
+    templateData['cid'] = e.cid;
+
+    var row = this.rowTemplate(templateData);
     this.$el.append(row);
   }
 
 , itemRemoved: function (e) {
-    var selector = 'tr[data-food-item-id=' + e.id + ']';
+    var selector = 'tr[data-food-item-id=' + e.cid + ']';
     this.$(selector).remove()
   }
 
