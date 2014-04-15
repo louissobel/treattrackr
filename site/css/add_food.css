@@ -3,17 +3,18 @@
 }
 
 body {
-  font-family:Helvetica,sans-serif;
+  font-family: Helvetica,sans-serif;
+  background-color: #F5F5F5;
 }
 
 .content {
-  width:900px;
+  width:1000px;
   padding:15px;
   margin:auto;
 }
 
 .food-adder {
-  height:450px;
+  height:525px;
 }
 
 .food-adder-component {
@@ -24,23 +25,24 @@ body {
   height:90%;
   position:relative;
   top:5%;
-  border-color:black;
-  border-width:1px;
-  border-style:solid;
-  border-radius: 5px 0px 0px 5px;
+  border: 2px solid #BDBDBD;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px 0px 0px 7px;
   border-right-style:none;
+  box-shadow: -4px 4px 4px #CCCCCC;
 }
 
 .food-adder-list {
   width:40%;
   height:100%;
-  background-color:orange;
+  background-color:;
   position:relative;
   border-style:solid;
-  border-color:black;
+  border-color:#BDBDBD;
   border-width:4px;
   border-radius:10px;
-  box-shadow: 0px 0px 5px;
+  box-shadow: 0px 0px 10px #AAAAAA;
 }
 
 .food-add-list-nav {
@@ -48,30 +50,32 @@ body {
   position:relative;
   border-bottom-style:solid;
   border-width:1px;
+  vertical-align: middle;
 }
 
-.food-add-list-nav > a {
-  display:block;
-  height:60px;
-  width:60px;
-  color:blue;
-  font-size:30px;
-  font-family:monospace;
-  line-height:60px;
-  text-align:center;
-  border-radius:50%;
-  background-color:green;
+.food-add-list-nav > span {
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
   position:absolute;
+  font-size: 30px;
+  color: black;
+  padding: 11px;
+  border-radius: 10%;
+}
+
+.food-add-list-nav > span:hover {
+  background-color: black;
+  color: white;
 }
 
 .food-add-list-nav > .left-nav {
-  left:0px;
-  top:0px;
+  left:1%;
 }
 
 .food-add-list-nav > .right-nav {
-  right:0px;
-  top:0px;
+  right:1%;
 }
 
 .food-add-list-nav h1 {
@@ -101,11 +105,9 @@ td.img-cell {
 .food-adder-section {
   width:50%;
   height:100%;
-  background-color:rgba(0,255,0,.5);
   float:left;
   padding:25px;
   padding-top:5px;
-
   text-align:center;
 }
 
@@ -114,7 +116,7 @@ td.img-cell {
 }
 
 .food-adder-img-holder {
-  height:35%;
+  height:40%;
 }
 
 .food-adder-img-holder > img {
@@ -123,12 +125,13 @@ td.img-cell {
 
 .food-adder-input {
   margin-top:5px;
-  width:100%;
+  width:80%;
+  margin-left: 10%;
 }
 
 .food-adder-submit {
-  margin-top:5px;
-  width:100%;
+  margin-top:15px;
+  width:80%;
 }
 
 .food-adder-divider {
@@ -137,7 +140,7 @@ td.img-cell {
   left:50%;
   top:10%;
   width:1px;
-  background-color:black;
+  background-color:#BDBDBD;
 }
 
 
