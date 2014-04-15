@@ -4,6 +4,9 @@ var ItemAdder = Backbone.View.extend({
 
   initialize: function (options) {
     this.options = options || {};
+
+    // Set up for date picker
+    this.setUpDatePicker();
   }
 
 , events: {
@@ -23,6 +26,11 @@ var ItemAdder = Backbone.View.extend({
       form[input.name] = input.value;
     });
     return form
+  }
+
+, setUpDatePicker: function () {
+    var dateEl = this.$el.find('.food-adder-input[name=date]');
+    dateEl.val('Today');
   }
 
 });
