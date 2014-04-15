@@ -2,8 +2,21 @@
 
 var consumableItems = new ConsumableItemCollection();
 consumableItems.add({
-  name: 'Pizza',
-  calories: 100,
+  img_url: 'img/items/pizza.jpg'
+, name: 'Pizza'
+, calories: 100
+});
+
+consumableItems.add({
+  img_url: "img/items/hamburger.jpg"
+, name: 'Hamburger'
+, calories: 1000
+});
+
+consumableItems.add({
+  img_url: "img/items/koala.jpg"
+, name: 'Koala'
+, calories: 160
 });
 
 var FoodAdderView = Backbone.View.extend({
@@ -23,6 +36,7 @@ var FoodAdderView = Backbone.View.extend({
       var itemType = $(e).data('itemType')
         , ia = new ItemAdder({
             el: e
+          , model: consumableItems
           , itemType: $(e).data('itemType')
           })
         ;

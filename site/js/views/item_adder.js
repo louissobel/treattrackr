@@ -7,6 +7,7 @@ var ItemAdder = Backbone.View.extend({
 
     // Set up for date picker
     this.setUpDatePicker();
+    this.setUpAutoComplete();
   }
 
 , events: {
@@ -31,6 +32,41 @@ var ItemAdder = Backbone.View.extend({
 , setUpDatePicker: function () {
     var dateEl = this.$el.find('.food-adder-input[name=date]');
     dateEl.val('Today');
+  }
+
+, setUpAutoComplete: function () {
+    var nameEl = this.$el.find('.food-adder-input[name=name]');
+    nameEl.autocomplete({
+      source: this.autocompleteSource.bind(this)
+    , change: this.handleAutocompleteChange.bind(this)
+    });
+  }
+
+, autocompleteSource: function (request, response) {
+    var regexp = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i")
+      , results = this.model.filter(function (consumableItem) {
+          return regexp.test(consumableItem.get("name"));
+        });
+    response(results.map(function (consumableItem) {
+      return {
+        item: consumableItem
+      , value: consumableItem.get("name")
+      }
+    }))
+  }
+
+, handleAutocompleteChange: function (e, ui) {
+    this.setImageToItem(ui.item.item);
+  }
+
+, setImageToItem: function (consumableItem) {
+    var src;
+    if (consumableItem) {
+      src = consumableItem.get('img_url');
+    } else {
+      src = ConsumableItem.DEFAULT_IMG_URL;
+    }
+    this.$el.find('.food-adder-img-holder img').attr('src', src);
   }
 
 });

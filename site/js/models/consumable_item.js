@@ -7,4 +7,6 @@ var ConsumableItem = Backbone.Model.extend({
       img_url: "img/cupcake.png"
     }
   }
+}, {
+  DEFAULT_IMG_URL: "img/cupcake.png"
 });
