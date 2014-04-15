@@ -21,11 +21,17 @@ var ItemAdder = Backbone.View.extend({
   }
 
 , _obtainNewItem: function () {
-    // For now, get it from the form :/
+    // Get it from the form :/
+    // Augment it from model if we have one
     var form = {};
     this.$el.find(".food-adder-input").each(function (i, input) {
       form[input.name] = input.value;
     });
+
+    if (this._selectedItem) {
+      // Should be a `merge` method
+      form['img_url'] = this._selectedItem.get("img_url")
+    }
     return form
   }
 
@@ -57,6 +63,7 @@ var ItemAdder = Backbone.View.extend({
 
 , handleAutocompleteChange: function (e, ui) {
     this.setImageToItem(ui.item.item);
+    this._selectedItem = ui.item.item;
   }
 
 , setImageToItem: function (consumableItem) {
