@@ -5,18 +5,21 @@ consumableItems.add({
   img_url: 'img/items/pizza.jpg'
 , name: 'Pizza'
 , calories: 100
+, default_quantity: "1 slice"
 });
 
 consumableItems.add({
   img_url: "img/items/hamburger.jpg"
 , name: 'Hamburger'
 , calories: 1000
+, default_quantity: "1 Quarter Pounder"
 });
 
 consumableItems.add({
   img_url: "img/items/koala.jpg"
 , name: 'Koala'
 , calories: 160
+, default_quantity: "1 Endangered Species"
 });
 
 var FoodAdderView = Backbone.View.extend({

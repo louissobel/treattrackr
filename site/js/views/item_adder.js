@@ -44,7 +44,9 @@ var ItemAdder = Backbone.View.extend({
     var nameEl = this.$el.find('.food-adder-input[name=name]');
     nameEl.autocomplete({
       source: this.autocompleteSource.bind(this)
-    , change: this.handleAutocompleteChange.bind(this)
+    , select: this.handleAutocompleteSelect.bind(this)
+    , focus: this.handleAutocompleteFocus.bind(this)
+    , close: this.handleAutocompleteClose.bind(this)
     });
   }
 
@@ -61,12 +63,33 @@ var ItemAdder = Backbone.View.extend({
     }))
   }
 
-, handleAutocompleteChange: function (e, ui) {
-    this.setImageToItem(ui.item.item);
-    this._selectedItem = ui.item.item;
+, handleAutocompleteSelect: function (e, ui) {
+    var item = ui.item ? ui.item.item : null;
+    this._setItem(item);
   }
 
-, setImageToItem: function (consumableItem) {
+, handleAutocompleteFocus: function (e, ui) {
+    var item = ui.item ? ui.item.item : null;
+    this._setItem(item);
+  }
+
+, handleAutocompleteClose: function (e, ui) {
+    // If we have one, auto populate caloreis
+    // quantity and move to submit. otherwise,
+    // do nothgin
+    if (this._selectedItem) {
+      this.$el.find('.food-adder-input[name=quantity]').val(this._selectedItem.get("default_quantity"));
+      this.$el.find('.food-adder-input[name=calories]').val(this._selectedItem.get("calories"));
+      this.$el.find('.food-adder-submit').focus();
+    }
+  }
+
+, _setItem: function (item) {
+    this._selectedItem = item;
+    this._setImageToItem(item);
+  }
+
+, _setImageToItem: function (consumableItem) {
     var src;
     if (consumableItem) {
       src = consumableItem.get('img_url');
