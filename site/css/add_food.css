@@ -143,6 +143,25 @@ td.img-cell {
   background-color:#BDBDBD;
 }
 
+.table tr:nth-child(odd){
+  background: none
+}
+
+.table tr:nth-child(even){
+  background: #EEE
+}
+
+#icon-column {
+  width: 68px;
+}
+
+#food-column {
+  width: 112px;
+}
+
+#calories-column {
+  width: 84px;
+}
 
 
 .clearfix {
