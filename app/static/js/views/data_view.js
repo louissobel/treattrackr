@@ -3,10 +3,8 @@ Base View for the Data Page
 */
 
 var DataView = Backbone.View.extend({
-  
-  el: null // TODO which el?
 
-, initialize: function () {
+  initialize: function () {
 
     // TODO:
     // get the global history object?

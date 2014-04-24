@@ -4,7 +4,7 @@ View to hold the other data views
 
 var DataGraphsContainer = Backbone.View.extend({
   
-  el: null // TODO which el?
+  el: '.data-holder'
 
 , initialize: function (options) {
     options = options || {};
@@ -15,6 +15,32 @@ var DataGraphsContainer = Backbone.View.extend({
       throw new Error("No DataDateRange provided to DataView");
     };
     // TODO:
-    //  - create the three subviews
+    this.graphs = [
+      new HighlightsGraph({
+        el: this.$el.find('.data-food-highlights')
+      , model: this.model
+      , dataDateRange: this.dataDateRange
+      , type: 'food'
+      })
+    , new HighlightsGraph({
+        el: this.$el.find('.data-exercise-highlights')
+      , model: this.model
+      , dataDateRange: this.dataDateRange
+      , type: 'exercise'
+      })
+    , new HistoryGraph({
+        el: this.$el.find('.data-history')
+      , model: this.model
+      , dataDateRange: this.dataDateRange
+      })
+    ]
+
+    this.listenTo(this.dataDateRange, "change", this.render);
+  }
+
+, render: function () {
+    _.each(this.graphs, function (g) {
+      g.render();
+    })
   }
 });
