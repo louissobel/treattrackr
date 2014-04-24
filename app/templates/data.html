@@ -7,6 +7,14 @@
 <link rel="stylesheet" href="/static/css/data.css" type="text/css" />
 {% endblock %}
 
+{% block extra_js %}
+<script type="text/javascript">
+  $(function () {
+    window.dv = new DataView();
+  });
+</script>
+{% endblock %}
+
 {% block content %}
 <h1>Data</h1>
 {% endblock %}
