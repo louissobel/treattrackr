@@ -7,6 +7,35 @@
 <link rel="stylesheet" href="/static/css/data.css" type="text/css" />
 {% endblock %}
 
+{% block extra_js %}
+<script type="text/javascript">
+  $(function () {
+    window.dv = new DataView();
+  });
+</script>
+{% endblock %}
+
 {% block content %}
-<h1>Data</h1>
+
+<div class='data-main'>
+
+	<div class='data-datepicker'>
+	</div>
+
+	<div class='data-holder'>
+
+		<div class='data-food-highlights'>
+		</div>
+
+		<div class='data-exercise-highlights'>
+		</div>
+
+		<div class='data-history'>
+		</div>
+
+	</div>
+
+
+</div>
+
 {% endblock %}
