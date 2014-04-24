@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<head>
+  <title>TreatTrackr &mdash; Add Food</title>
+
+  <script type="text/javascript" src="/static/js/vendor/jquery.js" ></script>
+  <script type="text/javascript" src="/static/js/vendor/jquery-ui.js"></script>
+  <script type="text/javascript" src="/static/js/vendor/underscore.js" ></script>
+  <script type="text/javascript" src="/static/js/vendor/backbone.js" ></script>
+
+  <!-- models -->
+  <script type="text/javascript" src="/static/js/models/consumed_item.js"></script>
+  <script type="text/javascript" src="/static/js/models/consumed_item_collection.js"></script>
+
+  <script type="text/javascript" src="/static/js/models/consumable_item.js"></script>
+  <script type="text/javascript" src="/static/js/models/consumable_item_collection.js"></script>
+
+  <!-- views -->
+  <script type="text/javascript" src="/static/js/views/consumed_item_table.js"></script>
+  <script type="text/javascript" src="/static/js/views/item_adder.js"></script>
+  <script type="text/javascript" src="/static/js/views/add_food_view.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      window.fav = new FoodAdderView();
+    });
+  </script>
+
+  <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
+  <link type="text/css" href="/static/vendor/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/add_food.css" type="text/css" />
+
+</head>
+
+<body>
+<nav class="navbar navbar-inverse" role="navigation">
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">TreatTrackr</a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Add Food</a></li>
+        <li><a href="#">Data</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="content">
+
+  <div class="food-adder">
+
+    <div class="food-adder-drawer food-adder-component">
+      <div class="food-adder-section" data-item-type="food">
+        <h3>Add Food</h3>
+        <div class="food-adder-img-holder">
+          <img src="static/img/cupcake.png" />
+        </div>
+
+        <div class="food-adder-form-holder">
+          <form action="#">
+            <input name="name" class="food-adder-input form-control input-sm" type="text" placeholder="Food" />
+            <input name="quantity" class="food-adder-input form-control input-sm" type="text" placeholder="Quantity" />
+            <input name="calories" class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
+            <input name="date" class="food-adder-input form-control input-sm" type="text" placeholder="Date" />
+            <button type="submit" class="btn btn-success food-adder-submit">Add!</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="food-adder-divider" data-item-type="exercise"></div>
+
+      <div class="food-adder-section">
+        <h3>Add Exercise</h3>
+        <div class="food-adder-img-holder">
+          <img src="static/img/cupcake.png" />
+        </div>
+
+        <div class="food-adder-form-holder">
+          <form action="#">
+            <input name="name" class="food-adder-input form-control input-sm" type="text" placeholder="Exercise" />
+            <input name="duration" class="food-adder-input form-control input-sm" type="text" placeholder="Duration" />
+            <input name="calories" class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
+            <input name="date" class="food-adder-input form-control input-sm" type="text" placeholder="Date" />
+            <button type="submit" class="btn btn-success food-adder-submit">Add!</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="food-adder-list food-adder-component">
+      <div class="food-add-list-nav">
+        <!-- date stuff -->
+        <span class = "glyphicon glyphicon-chevron-left left-nav"></span>
+        <h1>Today</h1>
+        <span class = "glyphicon glyphicon-chevron-right right-nav"></span>
+      <div>
+
+      <div class="food-adder-list-table-holder">
+        <table class="table">
+          <thead>
+            <tr>
+              <th id = "icon-column"></th>
+              <th id = "food-column">Food</th>
+              <th id = "calories-column">Calories</th>
+              <th id = "remove-column"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <script type="text/template" id="food-list-row-template">
+            <tr class="food-adder-list-row" data-food-item-id="<%= cid %>">
+              <td class="img-cell"><img src="<%= img_url %>"/></td>
+              <td><%= name %></td>
+              <td><%= calories %></td>
+              <td>
+                <button type="button" class="btn btn-danger btn-xs food-list-delete-item">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </td>
+            </tr>
+            </script>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+  </div>
+
+</div>
+</body>
+
+</html>
