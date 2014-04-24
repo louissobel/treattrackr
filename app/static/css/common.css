@@ -24,3 +24,7 @@ body {
 .clearfix {
   clear:both;
 }
+
+.input-group-addon.clickable {
+	cursor:pointer;
+}

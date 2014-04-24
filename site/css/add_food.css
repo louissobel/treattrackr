@@ -143,6 +143,10 @@ td.img-cell {
   background-color:#BDBDBD;
 }
 
+.table {
+  width: 100%;
+}
+
 .table tr:nth-child(odd){
   background: none
 }
@@ -162,7 +166,6 @@ td.img-cell {
 #calories-column {
   width: 84px;
 }
-
 
 .clearfix {
   clear:both;
