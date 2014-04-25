@@ -1,0 +1,40 @@
+{% set admin_type = ("User Detail (%s)" % user.username) %}
+
+{% extends 'admin/base.html' %}
+
+
+{% block admin_content %}
+
+<div>
+  <form action="" method="POST">
+    <div class="form-group">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+  </form>
+</div>
+
+<div class='col-sm-6'>
+  <h2>History ({{history.consumed_items|length}})</h2>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Date</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for consumed_item in history.consumed_items %}
+          <tr>
+            <td>{{ consumed_item.id }}</td>
+            <td>{{ consumed_item.date }}</td>
+            <td>{{ consume_item.name }}</td>
+          </td>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+{% endblock %}
+  

@@ -1,0 +1,62 @@
+{% set admin_type = 'Users' %}
+
+{% extends 'admin/base.html' %}
+
+{% block admin_content %}
+
+<div class="col-sm-8">
+  <h2>Users ({{ users|length }})</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Details</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>
+          {{ user.id }}
+        </td>
+        <td>
+          {{ user.username }}
+        </td>
+        <td>
+          <a href="./{{user.username}}">
+            <button class="btn btn-xs btn-info">
+              <span class="glyphicon glyphicon-info-sign"></span>
+            </button>
+          </a>
+        </td>
+        <td>
+          <form action="./{{user.username}}" method="POST">
+            <button type="submit" class="btn btn-xs btn-danger">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="col-sm-4">
+  <h2>Add User</h2>
+  <form action="" method="POST">
+    <div class="form-group">
+      <label for="username" class="control-label">Username</label>
+      <input type="text" class="form-control" name="username" id="username" />
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Admin &mdash; {{ admin_type }}
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/admin.css" type="text/css" />
+{% endblock %}
+
+{% block content %}
+<a href="/admin/">Admin Index</a>
+<h1 class="admin-header">Admin &mdash; {{ admin_type }}</h1>
+{% block admin_content %}
+{% endblock %}
+
+{% endblock %}
