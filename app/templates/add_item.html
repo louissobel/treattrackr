@@ -25,7 +25,7 @@ Add Item
       <div class="food-adder-section" data-item-type="food">
         <h3>Add Food</h3>
         <div class="food-adder-img-holder">
-          <img src="static/img/cupcake.png" />
+          <img src="static/img/food.png" />
         </div>
 
         <div class="food-adder-form-holder">
@@ -42,7 +42,7 @@ Add Item
             </div>
 
 
-            <button type="submit" class="btn btn-success food-adder-submit">Add!</button>
+            <button type="submit" class="btn btn-success food-adder-submit">ADD</button>
           </form>
         </div>
       </div>
@@ -51,8 +51,11 @@ Add Item
 
       <div class="food-adder-section">
         <h3>Add Exercise</h3>
-        <div class="food-adder-img-holder">
-          <img src="static/img/cupcake.png" />
+        <div class="exercise-adder-img-holder">
+          <img src="static/img/running.png" />
+          <img src="static/img/weight.png" />
+          <img src="static/img/biking.png" />
+          <img src="static/img/swimming.png" />
         </div>
 
         <div class="food-adder-form-holder">
@@ -61,9 +64,6 @@ Add Item
             <input name="duration" class="food-adder-input form-control input-sm" type="text" placeholder="Duration" />
             <input name="calories" class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
             
-
-
-
             <div class="food-adder-input input-group input-append date" data-date="" data-date-format="dd-mm-yyyy">
               <input type="text" class="form-control input-sm" placeholder="Date"></input>
               <span class="clickable input-group-addon add-on">
@@ -73,7 +73,7 @@ Add Item
 
 
 
-            <button type="submit" class="btn btn-success food-adder-submit">Add!</button>
+            <button type="submit" class="btn btn-success food-adder-submit">ADD</button>
           </form>
         </div>
 
@@ -89,7 +89,13 @@ Add Item
       <div>
 
       <div class="food-adder-list-table-holder">
-        <table class="table">
+<!--         <div class="food-list-header">
+          <div id = "food-column">Food </div>
+          <div id = "calories-column">Clories </div>
+        </div> -->
+
+
+        <table class="table food-list-table">
           <thead>
             <tr>
               <th id = "icon-column"></th>
