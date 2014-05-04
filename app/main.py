@@ -1,4 +1,5 @@
 import os
+import json
 
 import flask
 import mongoengine
@@ -17,7 +18,9 @@ def index():
 
 @app.route('/add_item')
 def add_item():
-    return flask.render_template('add_item.html')
+    # Get list of consumable items
+    items = json.dumps([o.as_dict() for o in models.ConsumableItem.objects])
+    return flask.render_template('add_item.html', items=items)
 
 @app.route('/data')
 def data():

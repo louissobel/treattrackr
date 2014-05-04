@@ -94,7 +94,7 @@ var ItemAdder = Backbone.View.extend({
         // do nothgin
         if (this._selectedItem) {
             this.$el.find('.food-adder-input[name=quantity]').val(this._selectedItem.get("default_quantity"));
-            this.$el.find('.food-adder-input[name=calories]').val(this._selectedItem.get("calories"));
+            this.$el.find('.food-adder-input[name=calories]').val(this._selectedItem.get("default_calories"));
             this.$el.find('.food-adder-submit').focus();
         }
     }

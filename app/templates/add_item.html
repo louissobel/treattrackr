@@ -7,6 +7,7 @@ Add Item
 
 {% block extra_js %}
 <script type="text/javascript">
+  window.TTDATA.consumableItems = {{ items|safe }};
   $(function () {
     window.fav = new FoodAdderView();
   });

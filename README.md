@@ -4,6 +4,22 @@ TreatTrackr
 6.813 Project
 
 
+Managing the Items Database
+==================
+
+It doesn't make sense for us to go through the work of re-creating all of
+our "ConsumableItems" databases by hand on each of our machines,
+so we'll have it checked in as the file `items.json`.
+
+To load it into your local database, run
+
+`python app/item_util.py --load items.json`
+
+If you make changes to the items database you'd like to share (such as adding a bunch),
+
+`python app/item_util.py --dump > items.json`
+
+
 Getting Mongo working
 ===================
 

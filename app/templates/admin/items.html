@@ -4,48 +4,7 @@
 
 {% block admin_content %}
 
-<div class="col-sm-8">
-  <h2>Items ({{items|length}})</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Img</th>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Calories</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in items %}
-        <tr>
-          <td>{{item.id}}</td>
-          <td>{{item.img_url}}</td>
-          <td>{{item.name}}</td>
-          <td>{{item.default_quantity}}</td>
-          <td>{{item.default_calories}}</td>
-          <td>
-            <a href="./{{item.id}}">
-              <button type="button" class="btn btn-xs btn-info">
-                <span class="glyphicon glyphicon-info-sign"></span>
-              </button>
-            </a>
-          </td>
-          <td>
-            <form action="./{{item.id}}" method="POST">
-              <button type="submit" name="action" value="delete" class="btn btn-xs btn-danger">
-                <span class="glyphicon glyphicon-trash"></span>
-              </button>
-            </form>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-</div>
-
-<div class="col-sm-4">
+<div class="row">
   <div class="well">
     <h4>Add new:</h4>
 
@@ -89,6 +48,47 @@
       </div>
     </form>
   </div>
+
+</div>
+
+<div class="row">
+  <h2>Items ({{items|length}})</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Img</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Calories</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+        <tr>
+          <td>{{item.id}}</td>
+          <td>{{item.img_url}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.default_quantity}}</td>
+          <td>{{item.default_calories}}</td>
+          <td>
+            <a href="./{{item.id}}">
+              <button type="button" class="btn btn-xs btn-info">
+                <span class="glyphicon glyphicon-info-sign"></span>
+              </button>
+            </a>
+          </td>
+          <td>
+            <form action="./{{item.id}}" method="POST">
+              <button type="submit" name="action" value="delete" class="btn btn-xs btn-danger">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
 </div>
 
