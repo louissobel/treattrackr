@@ -61,6 +61,7 @@
         <li class="{{ 'active' if active_tab == 'add_item' else '' }}"><a href="/add_item">Add Item</a></li>
         <li class="{{ 'active' if active_tab == 'data' else '' }}"><a href="/data">Data</a></li>
       </ul>
+      <p class="navbar-text navbar-right">Signed in as {{ g.user.username }}</p>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
