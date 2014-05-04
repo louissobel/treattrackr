@@ -63,5 +63,48 @@ def user_detail(username):
         user.delete()
         return flask.redirect('/admin/users')
 
+@app.route('/admin/items/', methods=('GET', 'POST'))
+def item_admin():
+    """
+    creates or views consumable items
+    """
+    if flask.request.method == "GET":
+        items = models.ConsumableItem.objects
+        return flask.render_template('admin/items.html', items=items)
+    else:
+        # Post
+        f = flask.request.form
+        item_type=f['item_type']
+        name=f['name']
+        default_quantity=f['default_quantity']
+        default_calories=f['default_calories']
+        img_url=f['img_url']
+
+        if not all([item_type, name, default_quantity, default_calories, img_url]):
+            flask.abort(400)
+        item = models.ConsumableItem(
+            item_type=f['item_type'],
+            name=f['name'],
+            default_quantity=f['default_quantity'],
+            default_calories=int(f['default_calories']),
+            img_url=f['img_url'],
+        )
+        item.save()
+        return flask.redirect("/admin/items")
+
+@app.route('/admin/items/<id>', methods=('GET', 'POST'))
+def item_detail(id):
+    """
+    get shows,
+    post edits
+    """
+    try:
+        item = models.ConsumableItem.objects.get(id=id)
+    except models.ConsumableItem.DoesNotExist:
+        flask.abort(404)
+
+    if flask.request.method == 'GET':
+        return flask.render_template('admin/item_detail.html', item=item)
+
 if __name__ == "__main__":
     app.run('0.0.0.0', port=6813)

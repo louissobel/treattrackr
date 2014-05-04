@@ -1,0 +1,19 @@
+{% set admin_type = ("Edit Item (%s)" % item.name) %}
+
+{% extends 'admin/base.html' %}
+
+{% block admin_content %}
+
+<div>
+  <form action="" method="POST"></div>
+</div>
+
+<div>
+  <form action="{{item.id}}/delete" method="POST">
+    <div class="form-group">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
