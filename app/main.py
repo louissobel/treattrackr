@@ -105,6 +105,31 @@ def item_detail(id):
 
     if flask.request.method == 'GET':
         return flask.render_template('admin/item_detail.html', item=item)
+    else:
+        # Post
+        f = flask.request.form
+
+        if f['action'] == 'delete':
+            # Then do it.
+            item.delete()
+            return flask.redirect('/admin/items')
+
+        item_type=f['item_type']
+        name=f['name']
+        default_quantity=f['default_quantity']
+        default_calories=f['default_calories']
+        img_url=f['img_url']
+
+        if not all([item_type, name, default_quantity, default_calories, img_url]):
+            flask.abort(400)
+
+        item.item_type = item_type
+        item.name = name
+        item.default_quantity = default_quantity
+        item.default_calories = default_calories
+        item.img_url = img_url
+        item.save()
+        return flask.redirect('/admin/items/' + str(item.id))
 
 if __name__ == "__main__":
     app.run('0.0.0.0', port=6813)

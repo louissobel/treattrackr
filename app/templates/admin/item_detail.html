@@ -4,16 +4,51 @@
 
 {% block admin_content %}
 
-<div>
-  <form action="" method="POST"></div>
-</div>
+<div class="row">
+  <div class="col-sm-6">
+    <form class="form" action="" method="POST">
+      <div class="form-group">
+        <label for="img_url">Img Path</label>
+        <input type="text" class="form-control" name="img_url" id="img_url" value="{{item.img_url}}"/>
+      </div>
 
-<div>
-  <form action="{{item.id}}/delete" method="POST">
-    <div class="form-group">
-      <button type="submit" class="btn btn-danger">Delete</button>
-    </div>
-  </form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" id="name" value="{{item.name}}"/>
+      </div>
+
+      <div class="form-group">
+        <label for="default_quantity">Default Quantity</label>
+        <input type="text" class="form-control" name="default_quantity" id="default_quantity" value="{{item.default_quantity}}"/>
+      </div>
+
+      <div class="form-group">
+        <label for="default_calories">Default Calories</label>
+        <input type="text" class="form-control" name="default_calories" id="default_calories" value="{{item.default_calories}}"/>
+      </div>
+
+      <div class="form-group">
+        <label>Item Type</label>
+        <label class="radio-inline">
+          <input type="radio" {{ 'checked' if item.item_type == 'food' }} name="item_type" value="food"/>
+          Food
+        </label>
+
+        <label class="radio-inline">
+          <input type="radio" {{ 'checked' if item.item_type == 'exercise' }} name="item_type" value="exercise"/>
+          Exercise
+        </label>
+
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" name="action" value="save">Save</button>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-danger" name="action" value="delete">Delete</button>
+      </div>
+    </form>
+  </div>
 </div>
 
 {% endblock %}

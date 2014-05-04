@@ -32,8 +32,8 @@
             </a>
           </td>
           <td>
-            <form action="./{{item.id}}/delete" method="POST">
-              <button type="submit" class="btn btn-xs btn-danger">
+            <form action="./{{item.id}}" method="POST">
+              <button type="submit" name="action" value="delete" class="btn btn-xs btn-danger">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
             </form>
