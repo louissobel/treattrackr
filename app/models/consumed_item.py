@@ -16,8 +16,15 @@ class ConsumedItem(mongoengine.EmbeddedDocument):
             'calories':self.calories,
             'img_url':self.img_url,
             'name':self.name,
-            'date':time.mktime(self.date.timetuple()) * 1000,
+            'date': self.format_date(),
             'quantity':self.quantity,
             'item_type':self.item_type,
             'id':str(self.id),
         }
+
+    def format_date(self):
+        if isinstance(self.date, basestring):
+            return self.date
+        else:
+            return time.mktime(self.date.timetuple()) * 1000,
+    
