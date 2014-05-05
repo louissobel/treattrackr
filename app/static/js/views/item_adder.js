@@ -4,6 +4,10 @@ var ItemAdder = Backbone.View.extend({
 
     initialize: function(options) {
         this.options = options || {};
+        this.itemType = options.itemType;
+        if (!this.itemType) {
+          throw new Error("No item type provided to itemAdder");
+        }
 
         // Set up for date picker
         this.setUpDatePicker();
@@ -26,7 +30,9 @@ var ItemAdder = Backbone.View.extend({
     _obtainNewItem: function() {
         // Get it from the form :/
         // Augment it from model if we have one
-        var form = {};
+        var form = {
+          item_type: this.itemType
+        };
         this.$el.find(".food-adder-input").each(function(i, input) {
             var $i = $(input);
             if ($i.hasClass('date')) {

@@ -9,6 +9,8 @@
   <script type="text/javascript" src="/static/js/vendor/underscore.js" ></script>
   <script type="text/javascript" src="/static/js/vendor/backbone.js" ></script>
   <script type="text/javascript" src="/static/js/vendor/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="/static/js/vendor/moment.js"></script>
+  <script type="text/javascript" src="/static/js/vendor/daterangepicker.js"></script>
 
   <!-- models -->
   <script type="text/javascript" src="/static/js/models/consumed_item.js"></script>
@@ -31,14 +33,19 @@
   <script type="text/javascript" src="/static/js/views/data_view.js"></script>
 
   <script type="text/javascript">
-    window.TTDATA = {};
+    window.TTDATA = {
+      user: {
+        username: "{{ g.user.username }}"
+      , id: "{{ g.user.id }}"
+      }
+    };
   </script>
 
   <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
   <link rel="stylesheet" type="text/css" href="/static/css/datepicker.css" />
-
   <link type="text/css" href="/static/vendor/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/static/css/common.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/daterangepicker-bs3.css" />
 
   {% block extra_css %}
   {% endblock %}
@@ -58,9 +65,10 @@
 
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="{{ 'active' if active_tab == 'add_item' else '' }}"><a href="/add_item">Add Item</a></li>
-        <li class="{{ 'active' if active_tab == 'data' else '' }}"><a href="/data">Data</a></li>
+        <li class="{{ 'active' if active_tab == 'add_item' else '' }}"><a href="/add_item?user={{g.user.username}}">Add Item</a></li>
+        <li class="{{ 'active' if active_tab == 'data' else '' }}"><a href="/data?user={{g.user.username}}">Data</a></li>
       </ul>
+      <p class="navbar-text navbar-right">Signed in as {{ g.user.username }}</p>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

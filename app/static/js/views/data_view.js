@@ -8,11 +8,7 @@ var DataView = Backbone.View.extend({
 
     // TODO:
     // get the global history object?
-    var dataDateRange = new DataDateRange({
-      mode: DAILY_DATA_MODE
-    , start: new Date() // Start off showing today
-    , end: new Date() // And ending today. correcT?
-    });
+    var dataDateRange = new DataDateRange();
 
     this.dataDateRangePicker = new DataDateRangePicker({
       model: dataDateRange

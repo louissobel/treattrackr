@@ -11,7 +11,6 @@ var HighlightsGraph = Backbone.View.extend({
   }
 
 , render: function () {
-//    this.$el.html(this.dataDateRange.get("mode") + " " + this.type + " highlights");
     $canvas = this.$el.find(".canvas");
 
 

@@ -13,6 +13,9 @@ var FoodAdderView = Backbone.View.extend({
       model: this.consumedItems
     });
 
+    this.listenTo(this.consumedItems, 'add', this.handleItemAdded);
+    this.listenTo(this.consumedItems, 'delete', this.handleItemDeleted);
+
     // Two ItemAdders, one for food, one for exercise
     $('.food-adder-section').each(function (i, e) {
       var itemType = $(e).data('itemType')
@@ -36,5 +39,27 @@ var FoodAdderView = Backbone.View.extend({
 
 , itemAdded: function (itemType, item) {
     this.consumedItems.add(item);
+  }
+
+, handleItemAdded: function (item) {
+    console.log(item);
+    // Ajax that change to the server.
+    var payload = {
+        calories: item.get('calories')
+      , img_url: item.get('img_url')
+      , name: item.get('name')
+      , date: item.get('date')
+      , quantity: item.get('quantity')
+      , item_type: item.get('item_type')
+      }
+      , url = "/users/" + TTDATA.user.id + "/history"
+      ;
+    $.post(url, payload, function (response) {
+      item.set('id', response.id);
+    });
+  }
+
+, handleItemDeleted: function (item) {
+    console.log(item);
   }
 });

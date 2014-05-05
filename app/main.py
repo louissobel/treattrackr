@@ -1,5 +1,6 @@
 import os
 import json
+import functools
 
 import flask
 import mongoengine
@@ -12,19 +13,75 @@ app.debug = True
 # TODO: connect based on envvar for heroku.
 mongoengine.connect('treattrackr-dev')
 
+
+def require_user(f):
+    @functools.wraps(f)
+    def inner(*args, **kwargs):
+        username = flask.request.args.get('user')
+        if username is None:
+            return "Specifiy a username in the url like <code>localhost:6813/add_item?user=caloriecounter111"
+        else:
+            flask.g.user, _ = models.User.objects.get_or_create(username=username)
+            return f(*args, **kwargs)
+    return inner
+
+@app.before_request
+def default_admin_user():
+    flask.g.user, _ = models.User.objects.get_or_create(username='admin')
+
 @app.route('/')
 def index():
     return flask.redirect('/add_item')
 
 @app.route('/add_item')
+@require_user
 def add_item():
     # Get list of consumable items
     items = json.dumps([o.as_dict() for o in models.ConsumableItem.objects])
     return flask.render_template('add_item.html', items=items)
 
 @app.route('/data')
+@require_user
 def data():
-    return flask.render_template('data.html')
+    history, _ = models.History.objects.get_or_create(user=flask.g.user)
+    history_list = json.dumps([i.as_dict() for i in history.consumed_items])
+    return flask.render_template('data.html', history=history_list)
+
+@app.route('/users/<user_id>/history', methods=('GET', 'POST'))
+def user_history(user_id):
+    try:
+        user = models.User.objects.get(id=user_id)
+    except models.User.DoesNotExist:
+        flask.abort(404)
+    history, _ = models.History.objects.get_or_create(user=user)
+
+    if flask.request.method == "GET":
+        return flask.jsonify({
+            'count': len(history.consumed_items),
+            'items': [i.as_dict() for i in history.consumed_items]
+        })
+    else:
+        f = flask.request.form
+        calories = f['calories']
+        img_url = f['img_url']
+        name = f['name']
+        date = f['date']
+        quantity = f['quantity']
+        item_type = f['item_type']
+        if not all([item_type, quantity, date, name, img_url, calories]):
+            flask.abort(400)
+
+        new_item = models.ConsumedItem(
+            calories=calories,
+            img_url=img_url,
+            name=name,
+            date=date,
+            quantity=quantity,
+            item_type=item_type,
+        )
+        history.add_item(new_item)
+        history.save()
+        return flask.jsonify(new_item.as_dict())
 
 # Admin endpoints
 @app.route('/admin/')
