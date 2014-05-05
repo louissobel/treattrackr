@@ -33,7 +33,12 @@
   <script type="text/javascript" src="/static/js/views/data_view.js"></script>
 
   <script type="text/javascript">
-    window.TTDATA = {};
+    window.TTDATA = {
+      user: {
+        username: "{{ g.user.username }}"
+      , id: "{{ g.user.id }}"
+      }
+    };
   </script>
 
   <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">

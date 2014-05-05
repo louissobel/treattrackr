@@ -45,6 +45,42 @@ def add_item():
 def data():
     return flask.render_template('data.html')
 
+@app.route('/users/<user_id>/history', methods=('GET', 'POST'))
+def user_history(user_id):
+    try:
+        user = models.User.objects.get(id=user_id)
+    except models.User.DoesNotExist:
+        flask.abort(404)
+    history, _ = models.History.objects.get_or_create(user=user)
+
+    if flask.request.method == "GET":
+        return flask.jsonify({
+            'count': len(history.consumed_items),
+            'items': [i.as_dict() for i in history.consumed_items]
+        })
+    else:
+        f = flask.request.form
+        calories = f['calories']
+        img_url = f['img_url']
+        name = f['name']
+        date = f['date']
+        quantity = f['quantity']
+        item_type = f['item_type']
+        if not all([item_type, quantity, date, name, img_url, calories]):
+            flask.abort(400)
+
+        new_item = models.ConsumedItem(
+            calories=calories,
+            img_url=img_url,
+            name=name,
+            date=date,
+            quantity=quantity,
+            item_type=item_type,
+        )
+        history.add_item(new_item)
+        history.save()
+        return flask.jsonify(new_item.as_dict())
+
 # Admin endpoints
 @app.route('/admin/')
 def admin_index():
