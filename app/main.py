@@ -1,5 +1,6 @@
 import os
 import json
+import functools
 
 import flask
 import mongoengine
@@ -12,17 +13,35 @@ app.debug = True
 # TODO: connect based on envvar for heroku.
 mongoengine.connect('treattrackr-dev')
 
+
+def require_user(f):
+    @functools.wraps(f)
+    def inner(*args, **kwargs):
+        username = flask.request.args.get('user')
+        if username is None:
+            return "Specifiy a username in the url like <code>localhost:6813/add_item?user=caloriecounter111"
+        else:
+            flask.g.user, _ = models.User.objects.get_or_create(username=username)
+            return f(*args, **kwargs)
+    return inner
+
+@app.before_request
+def default_admin_user():
+    flask.g.user, _ = models.User.objects.get_or_create(username='admin')
+
 @app.route('/')
 def index():
     return flask.redirect('/add_item')
 
 @app.route('/add_item')
+@require_user
 def add_item():
     # Get list of consumable items
     items = json.dumps([o.as_dict() for o in models.ConsumableItem.objects])
     return flask.render_template('add_item.html', items=items)
 
 @app.route('/data')
+@require_user
 def data():
     return flask.render_template('data.html')
 
