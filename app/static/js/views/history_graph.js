@@ -10,8 +10,6 @@ var HistoryGraph = Backbone.View.extend({
   }
 
 , render: function () {
-//    this.$el.html(this.dataDateRange.get("mode") + " history");
-
     $canvas = this.$el.find(".canvas");
 
 
