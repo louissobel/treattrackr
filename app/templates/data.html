@@ -9,6 +9,9 @@
 
 {% block extra_js %}
 <script type="text/javascript">
+
+  window.TTDATA.history = {{history|safe}}
+
   $(function () {
     window.dv = new DataView();
   });

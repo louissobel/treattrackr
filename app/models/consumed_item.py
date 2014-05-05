@@ -1,3 +1,5 @@
+import time
+
 import mongoengine
 
 class ConsumedItem(mongoengine.EmbeddedDocument):
@@ -14,7 +16,7 @@ class ConsumedItem(mongoengine.EmbeddedDocument):
             'calories':self.calories,
             'img_url':self.img_url,
             'name':self.name,
-            'date':self.date,
+            'date':time.mktime(self.date.timetuple()) * 1000,
             'quantity':self.quantity,
             'item_type':self.item_type,
             'id':str(self.id),

@@ -43,7 +43,9 @@ def add_item():
 @app.route('/data')
 @require_user
 def data():
-    return flask.render_template('data.html')
+    history, _ = models.History.objects.get_or_create(user=flask.g.user)
+    history_list = json.dumps([i.as_dict() for i in history.consumed_items])
+    return flask.render_template('data.html', history=history_list)
 
 @app.route('/users/<user_id>/history', methods=('GET', 'POST'))
 def user_history(user_id):
