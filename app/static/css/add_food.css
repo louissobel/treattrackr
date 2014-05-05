@@ -154,8 +154,26 @@ td.img-cell {
 .table.food-list-table {
   display: block;
   overflow: scroll;
-  height: 435px;
+  height: 395px;
 }
 
+.table-footer-divider {
+  width: 100%;
+  border-color: #BDBDBD;
+  border-top-style: solid;
+  border-width: 1px;
+}
 
+.total-calories {
+  font-size: 16px;
+  margin-top: 4px;
+  position: absolute;
+  float: left;
+}
+
+.sum-of-calories {
+  font-size: 16px;
+  margin-top: 4px;
+  float: right;
+}
 
