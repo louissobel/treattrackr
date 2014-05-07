@@ -45,12 +45,17 @@
   transform: translateY(-50%);
   position:absolute;
   font-size: 30px;
-  color: black;
+  color:#bbb;
   padding: 11px;
   border-radius: 10%;
 }
 
-.food-add-list-nav > span:hover {
+.food-add-list-nav > span.enabled {
+  cursor:pointer;
+  color: black;
+}
+
+.food-add-list-nav > span.enabled:hover {
   background-color: black;
   color: white;
 }
