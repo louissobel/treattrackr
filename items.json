@@ -3,7 +3,7 @@
     "name": "Hamburger", 
     "item_type": "food", 
     "default_calories": 500, 
-    "_id": "5366c270106cc03a74e8bf32", 
+    "_id": "5366c8c9106cc03b48cbd766", 
     "img_url": "/static/img/items/hamburger.jpg", 
     "default_quantity": "1"
   }, 
@@ -11,7 +11,7 @@
     "name": "Pizza", 
     "item_type": "food", 
     "default_calories": 250, 
-    "_id": "5366c5bd106cc03ac9fcf8ce", 
+    "_id": "5366c8c9106cc03b48cbd767", 
     "img_url": "/static/img/items/pizza.jpg", 
     "default_quantity": "1 Slice"
   }, 
@@ -19,7 +19,7 @@
     "name": "Koala", 
     "item_type": "food", 
     "default_calories": 6000, 
-    "_id": "5366c5e0106cc03ac9fcf8cf", 
+    "_id": "5366c8c9106cc03b48cbd768", 
     "img_url": "/static/img/items/koala.jpg", 
     "default_quantity": "1 Endangered Species"
   }, 
@@ -27,7 +27,7 @@
     "name": "Biking", 
     "item_type": "exercise", 
     "default_calories": 400, 
-    "_id": "5366c5f9106cc03ac9fcf8d0", 
+    "_id": "5366c8c9106cc03b48cbd769", 
     "img_url": "/static/img/biking.png", 
     "default_quantity": "1 Hour"
   }, 
@@ -35,7 +35,7 @@
     "name": "Running", 
     "item_type": "exercise", 
     "default_calories": 800, 
-    "_id": "5366c609106cc03ac9fcf8d1", 
+    "_id": "5366c8c9106cc03b48cbd76a", 
     "img_url": "/static/img/running.png", 
     "default_quantity": "30 Minutes"
   }, 
@@ -43,7 +43,7 @@
     "name": "Swimming", 
     "item_type": "exercise", 
     "default_calories": 1000, 
-    "_id": "5366c63b106cc03ac9fcf8d2", 
+    "_id": "5366c8c9106cc03b48cbd76b", 
     "img_url": "/static/img/swimming.png", 
     "default_quantity": "45 Minutes"
   }, 
@@ -51,8 +51,16 @@
     "name": "Weight Lifting", 
     "item_type": "exercise", 
     "default_calories": 10, 
-    "_id": "5366c652106cc03ac9fcf8d3", 
+    "_id": "5366c8c9106cc03b48cbd76c", 
     "img_url": "/static/img/weight.png", 
     "default_quantity": "20 Minutes"
+  }, 
+  {
+    "name": "Celery", 
+    "item_type": "food", 
+    "default_calories": 5, 
+    "_id": "536a75cf106cc0795969ddda", 
+    "img_url": "/static/img/items/celery.jpg", 
+    "default_quantity": "1 Stalk"
   }
 ]
