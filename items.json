@@ -62,5 +62,53 @@
     "_id": "536a75cf106cc0795969ddda", 
     "img_url": "/static/img/items/celery.jpg", 
     "default_quantity": "1 Stalk"
+  }, 
+  {
+    "name": "Dog", 
+    "item_type": "food", 
+    "default_calories": 250, 
+    "_id": "536a7fb7106cc0795969de4a", 
+    "img_url": "/static/img/items/dog.jpg", 
+    "default_quantity": "1 Puppy"
+  }, 
+  {
+    "name": "Oreo Cookie", 
+    "item_type": "food", 
+    "default_calories": 750, 
+    "_id": "536a7fec106cc0795969de4e", 
+    "img_url": "/static/img/items/oreo.jpg", 
+    "default_quantity": "1 Roll (20 cookies)"
+  }, 
+  {
+    "name": "Apple", 
+    "item_type": "food", 
+    "default_calories": 100, 
+    "_id": "536a7ffa106cc0795969de4f", 
+    "img_url": "/static/img/items/apple.jpg", 
+    "default_quantity": "1"
+  }, 
+  {
+    "name": "Burrito", 
+    "item_type": "food", 
+    "default_calories": 1500, 
+    "_id": "536a800c106cc0795969de50", 
+    "img_url": "/static/img/items/burrito.png", 
+    "default_quantity": "1"
+  }, 
+  {
+    "name": "Carrots", 
+    "item_type": "food", 
+    "default_calories": 400, 
+    "_id": "536a801b106cc0795969de51", 
+    "img_url": "/static/img/items/carrots.jpg", 
+    "default_quantity": "1 Cup"
+  }, 
+  {
+    "name": "Hot Dog", 
+    "item_type": "food", 
+    "default_calories": 1200, 
+    "_id": "536a802d106cc0795969de52", 
+    "img_url": "/static/img/items/hot_dog.png", 
+    "default_quantity": "3"
   }
 ]
