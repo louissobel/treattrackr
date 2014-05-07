@@ -36,7 +36,11 @@ var ItemAdder = Backbone.View.extend({
         this.$el.find(".food-adder-input").each(function(i, input) {
             var $i = $(input);
             if ($i.hasClass('date')) {
-                form['date'] = $i.find('input').val();
+                var dateString = $i.find('input').val();
+                if (dateString === 'Today') {
+                  dateString = moment().format('MM/DD/YYYY')
+                }
+                form['date'] = moment(dateString).valueOf();
             } else {
                 form[input.name] = input.value;
             }

@@ -1,6 +1,7 @@
 import os
 import json
 import functools
+import datetime
 
 import flask
 import mongoengine
@@ -38,7 +39,9 @@ def index():
 def add_item():
     # Get list of consumable items
     items = json.dumps([o.as_dict() for o in models.ConsumableItem.objects])
-    return flask.render_template('add_item.html', items=items)
+    history, _ = models.History.objects.get_or_create(user=flask.g.user)
+    history_list = json.dumps([i.as_dict() for i in history.consumed_items])
+    return flask.render_template('add_item.html', items=items, history=history_list)
 
 @app.route('/data')
 @require_user
@@ -65,7 +68,7 @@ def user_history(user_id):
         calories = f['calories']
         img_url = f['img_url']
         name = f['name']
-        date = f['date']
+        date = datetime.datetime.fromtimestamp(int(f['date']) / 1000) # it comes in as milliseconds
         quantity = f['quantity']
         item_type = f['item_type']
         if not all([item_type, quantity, date, name, img_url, calories]):

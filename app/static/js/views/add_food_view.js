@@ -5,12 +5,17 @@ var FoodAdderView = Backbone.View.extend({
   el: '.food-adder'
 
 , initialize: function () {
-    // Really, it would be a model that new about the current
-    // date, time, et cetera, but whatever.
+    this.dataDateRange = new DataDateRange({
+      start: new Date()
+    })
     this.consumableItems = new ConsumableItemCollection(window.TTDATA.consumableItems);
-    this.consumedItems = new ConsumedItemCollection();
+    this.consumedItems = new ConsumedItemCollection(TTDATA.history);
     this.consumedItemTable = new ConsumedItemTable({
       model: this.consumedItems
+    , dataDateRange: this.dataDateRange
+    });
+    this.consumedItemTableDatePicker = new ConsumedItemTableDatePicker({
+      model: this.dataDateRange
     });
 
     this.listenTo(this.consumedItems, 'add', this.handleItemAdded);

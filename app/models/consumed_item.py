@@ -26,5 +26,5 @@ class ConsumedItem(mongoengine.EmbeddedDocument):
         if isinstance(self.date, basestring):
             return self.date
         else:
-            return time.mktime(self.date.timetuple()) * 1000,
+            return time.mktime(self.date.timetuple()) * 1000
     
