@@ -41,6 +41,8 @@ var ItemAdder = Backbone.View.extend({
                   dateString = moment().format('MM/DD/YYYY')
                 }
                 form['date'] = moment(dateString).valueOf();
+            } else if (input.name === 'calories') {
+              form[input.name] = parseInt(input.value, 10);
             } else {
                 form[input.name] = input.value;
             }
@@ -50,6 +52,7 @@ var ItemAdder = Backbone.View.extend({
             // Should be a `merge` method
             form['img_url'] = this._selectedItem.get("img_url")
         }
+        console.log(form);
         return form
     }
 

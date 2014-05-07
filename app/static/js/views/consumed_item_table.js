@@ -1,6 +1,6 @@
 var ConsumedItemTable = Backbone.View.extend({
 
-    el: ".food-adder-list-table-holder tbody"
+    el: ".food-adder-list-table-holder"
 
     ,
     events: {
@@ -28,10 +28,16 @@ var ConsumedItemTable = Backbone.View.extend({
 
     ,
     render: function () {
-        this.$el.empty();
-        // TODO: just do the current date.
+        this.$el.find('tbody').empty();
         var itemsForTheDay = this.model.itemsOnDay(this.dataDateRange.get('start'));
         _.forEach(itemsForTheDay, this._appendItem.bind(this));
+
+        // Update the total calories.
+        // TODO. exercises should be negative......
+        var totalCalories = _.reduce(itemsForTheDay, function (runningTotal, item) {
+          return runningTotal + item.get('calories');
+        }, 0);
+        this.$el.find('.sum-of-calories').html(totalCalories);
     }
 
     ,
@@ -40,7 +46,7 @@ var ConsumedItemTable = Backbone.View.extend({
       templateData['cid'] = e.cid;
 
       var row = this.rowTemplate(templateData);
-      this.$el.append(row);
+      this.$el.find('tbody').append(row);
     }
 
 });
