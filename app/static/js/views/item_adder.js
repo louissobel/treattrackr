@@ -81,8 +81,15 @@ var ItemAdder = Backbone.View.extend({
 
     ,
     setUpDatePicker: function() {
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
         var dateEl = this.$el.find('.food-adder-input.date');
-        dateEl.datepicker();
+        dateEl.datepicker({
+              onRender: function(date) {
+                return date.valueOf() > now.valueOf() ? 'disabled' : '';
+              }
+        });
     }
 
     ,
