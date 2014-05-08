@@ -12,11 +12,25 @@ var ItemAdder = Backbone.View.extend({
         // Set up for date picker
         this.setUpDatePicker();
         this.setUpAutoComplete();
+        this.defaultDate = 'Today';
+
+        this.resetForm();
     }
 
     ,
     events: {
         "click .food-adder-submit": "newItemAdded",
+    }
+
+    ,
+    resetForm: function () {
+        this.$el.find('.food-adder-input.date input').val(this.defaultDate);
+    }
+
+    ,
+    setDefaultDate: function (dateString) {
+      this.$el.find('.food-adder-input.date input').val(dateString);
+      this.defaultDate = dateString;
     }
 
     ,
@@ -60,7 +74,6 @@ var ItemAdder = Backbone.View.extend({
     setUpDatePicker: function() {
         var dateEl = this.$el.find('.food-adder-input.date');
         dateEl.datepicker();
-        dateEl.find('input').val('Today');
     }
 
     ,
@@ -76,10 +89,10 @@ var ItemAdder = Backbone.View.extend({
 
     ,
     autocompleteSource: function(request, response) {
-        var regexp = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i"),
-            results = this.model.filter(function(consumableItem) {
-                return regexp.test(consumableItem.get("name"));
-            });
+        var regexp = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i")
+          , results = this.model.filter(function(consumableItem) {
+                return regexp.test(consumableItem.get("name")) && consumableItem.get("item_type") == this.itemType;
+            }.bind(this));
         response(results.map(function(consumableItem) {
             return {
                 item: consumableItem,
