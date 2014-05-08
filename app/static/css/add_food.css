@@ -194,3 +194,14 @@ td.img-cell {
   float: right;
 }
 
+.item-table-calories {
+  font-weight:bold;
+}
+
+.item-table-calories.food {
+  color:red;
+}
+
+.item-table-calories.exercise {
+  color:green;
+}

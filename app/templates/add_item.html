@@ -119,7 +119,11 @@ Add Item
             <tr class="food-adder-list-row" data-food-item-id="<%= cid %>">
               <td class="img-cell"><img src="<%= img_url %>"/></td>
               <td><%= name %></td>
-              <td><%= calories %></td>
+              <td>
+                <span class="item-table-calories <%= item_type %>">
+                  <%= item_type === 'exercise' ? '-' : '+' %><%= calories %>
+                </span>
+              </td>
               <td>
                 <button type="button" class="btn btn-danger btn-xs food-list-delete-item">
                   <span class="glyphicon glyphicon-trash"></span>
