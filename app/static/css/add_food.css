@@ -64,12 +64,22 @@
   left:1%;
 }
 
-.food-add-list-nav > .data-date {
-  text-align: center;
+.food-add-list-nav .data-date {
   margin-top: 0px;
   line-height: 60px;
   position: relative;
-  vertical-align: middle;
+  display:inline-block;
+  cursor:pointer;
+  padding-left:2px;
+  padding-right:2px;
+}
+
+.food-add-list-nav .data-date:hover {
+  color:#445;
+}
+
+.food-add-list-nav-heading-wrapper {
+  text-align:center;
 }
 
 .data-date > .date-cal {
