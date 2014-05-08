@@ -205,3 +205,17 @@ td.img-cell {
 .item-table-calories.exercise {
   color:green;
 }
+
+.undo-deletion {
+  width:500px;
+  position:fixed;
+  margin:0px;
+  z-index:10000;
+  top:25px;
+  left:50%;
+  margin-left:-250px;
+}
+
+.undo-button-innards {
+  text-align:center;
+}

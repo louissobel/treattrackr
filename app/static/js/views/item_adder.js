@@ -46,7 +46,7 @@ var ItemAdder = Backbone.View.extend({
         e.preventDefault();
         var newItem = this._obtainNewItem();
         this.resetForm();
-        this.trigger('newItem', this.options.itemType, newItem);
+        this.trigger('newItem', newItem);
     }
 
     ,

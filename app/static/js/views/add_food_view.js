@@ -17,11 +17,16 @@ var FoodAdderView = Backbone.View.extend({
     this.consumedItemTableDatePicker = new ConsumedItemTableDatePicker({
       model: this.dataDateRange
     });
+    this.undoDeletionView = new UndoDeletionView();
 
     this.listenTo(this.consumedItems, 'add', this.persistNewItem);
     this.listenTo(this.consumedItems, 'add', this.showDateOfJustAdded);
-    this.listenTo(this.consumedItems, 'delete', this.handleItemDeleted);
+    this.listenTo(this.consumedItems, 'remove', this.handleItemDeleted);
+    this.listenTo(this.consumedItems, 'remove', this.undoDeletionView.showUndo.bind(this.undoDeletionView));
     this.listenTo(this.dataDateRange, 'change', this.dateChanged);
+    this.listenTo(this.undoDeletionView, 'undo', this.itemAdded); // route it straight back in
+    this.listenTo(this.consumedItems, 'add', this.hideUndo);
+    this.listenTo(this.dataDateRange, 'change', this.hideUndo);
 
     // Two ItemAdders, one for food, one for exercise
     $('.food-adder-section').each(function (i, e) {
@@ -59,7 +64,7 @@ var FoodAdderView = Backbone.View.extend({
     this.exerciseAdder.setDefaultDate(dateString);
   }
 
-, itemAdded: function (itemType, item) {
+, itemAdded: function (item) {
     this.consumedItems.add(item);
   }
 
@@ -85,6 +90,11 @@ var FoodAdderView = Backbone.View.extend({
   }
 
 , handleItemDeleted: function (item) {
-    console.log(item);
+    // TODO PERSIST THIS TO THE SERVER
   }
+
+, hideUndo: function () {
+    this.undoDeletionView.hide();
+  }
+
 });
