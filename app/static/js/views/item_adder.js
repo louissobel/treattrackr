@@ -89,10 +89,10 @@ var ItemAdder = Backbone.View.extend({
 
     ,
     autocompleteSource: function(request, response) {
-        var regexp = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i"),
-            results = this.model.filter(function(consumableItem) {
-                return regexp.test(consumableItem.get("name"));
-            });
+        var regexp = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i")
+          , results = this.model.filter(function(consumableItem) {
+                return regexp.test(consumableItem.get("name")) && consumableItem.get("item_type") == this.itemType;
+            }.bind(this));
         response(results.map(function(consumableItem) {
             return {
                 item: consumableItem,
