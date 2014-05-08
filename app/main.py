@@ -11,8 +11,7 @@ import models
 app = flask.Flask(__name__)
 app.debug = True
 
-# TODO: connect based on envvar for heroku.
-mongoengine.connect('treattrackr-dev')
+mongoengine.connect('treattrackr-dev', host=os.environ.get('MONGOHQ_URL'))
 
 
 def require_user(f):
@@ -85,6 +84,27 @@ def user_history(user_id):
         history.add_item(new_item)
         history.save()
         return flask.jsonify(new_item.as_dict())
+
+@app.route('/users/<user_id>/history/<item_id>', methods=('POST',))
+def delete_consumed_item(user_id, item_id):
+    try:
+        user = models.User.objects.get(id=user_id)
+    except models.User.DoesNotExist:
+        flask.abort(404)
+    history, _ = models.History.objects.get_or_create(user=user)
+
+    # find the consume item we want to delete
+    item = None
+    for consumed_item in history.consumed_items:
+        if str(consumed_item.id) == item_id:
+            item = consumed_item
+            break
+    if item is None:
+        flask.abort(404)
+
+    history.consumed_items.remove(item)
+    history.save()
+    return flask.jsonify(item.as_dict())
 
 # Admin endpoints
 @app.route('/admin/')

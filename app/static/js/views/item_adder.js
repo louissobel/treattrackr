@@ -69,10 +69,9 @@ var ItemAdder = Backbone.View.extend({
     newItemAdded: function(e) {
         e.preventDefault();
         var newItem = this._obtainNewItem();
-        // If calories isn't number, user should fix it
         if (newItem !== undefined) {
             this.resetForm();
-            this.trigger('newItem', this.options.itemType, newItem);
+            this.trigger('newItem', newItem);
         }
     }
 
