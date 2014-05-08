@@ -194,5 +194,10 @@ def item_detail(id):
         item.save()
         return flask.redirect('/admin/items/' + str(item.id))
 
+# Favicon!
+@app.route('/favicon.ico')
+def favi():
+    return flask.redirect('/static/img/favicon.ico')
+
 if __name__ == "__main__":
     app.run('0.0.0.0', port=6813)
