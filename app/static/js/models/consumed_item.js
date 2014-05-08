@@ -2,12 +2,13 @@
 
 var ConsumedItem = Backbone.Model.extend({
 
-        initialize: function() {
-            console.log(this;
-                if (this.get('item_type') == 'food') {
-                    this.set('item_type', '/static/img/food.png');
-                } else {
-                    this.set('item_type', '/static/img/exercise.png');
-                }
+    initialize: function() {
+        if (!this.has('img_url')) {
+            if (this.get('item_type') == 'food') {
+                this.set('img_url', '/static/img/food.png');
+            } else {
+                this.set('img_url', '/static/img/exercise.png');
             }
-        });
+        }
+    }
+});
