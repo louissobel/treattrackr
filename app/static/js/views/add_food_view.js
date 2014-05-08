@@ -18,7 +18,8 @@ var FoodAdderView = Backbone.View.extend({
       model: this.dataDateRange
     });
 
-    this.listenTo(this.consumedItems, 'add', this.handleItemAdded);
+    this.listenTo(this.consumedItems, 'add', this.persistNewItem);
+    this.listenTo(this.consumedItems, 'add', this.showDateOfJustAdded);
     this.listenTo(this.consumedItems, 'delete', this.handleItemDeleted);
 
     // Two ItemAdders, one for food, one for exercise
@@ -46,8 +47,7 @@ var FoodAdderView = Backbone.View.extend({
     this.consumedItems.add(item);
   }
 
-, handleItemAdded: function (item) {
-    console.log(item);
+, persistNewItem: function (item) {
     // Ajax that change to the server.
     var payload = {
         calories: item.get('calories')
@@ -62,6 +62,10 @@ var FoodAdderView = Backbone.View.extend({
     $.post(url, payload, function (response) {
       item.set('id', response.id);
     });
+  }
+
+, showDateOfJustAdded: function (item) {
+    this.dataDateRange.set('start', new Date(item.get('date')));
   }
 
 , handleItemDeleted: function (item) {
