@@ -78,10 +78,10 @@ Add Item
         <h3>Add Exercise</h3>
         <div class="exercise-adder-img-holder">
           <div class="item-adder-default-image">
-            <img src="static/img/running.png" />
-            <img src="static/img/weight.png" />
-            <img src="static/img/biking.png" />
-            <img src="static/img/swimming.png" />
+            <img src="static/img/running.png" consumableItem-name="Running" />
+            <img src="static/img/weight.png" consumableItem-name="Weight Lifting" />
+            <img src="static/img/biking.png" consumableItem-name="Biking" />
+            <img src="static/img/swimming.png" consumableItem-name="Swimming" />
           </div>
           <div class="item-adder-other-image hidden">
             <img />
@@ -121,11 +121,12 @@ Add Item
         <!-- date stuff -->
         <span class = "glyphicon glyphicon-chevron-left left-nav enabled"></span>
 
-
-        <div class = "clickable data-date">
-          <span class = "glyphicon glyphicon-calendar date-cal"></span>
-          <h1 class="food-add-list-nav-heading">Today</h1>  
-          <b class = "caret"></b>
+        <div class="food-add-list-nav-heading-wrapper">
+          <div class = "clickable data-date" data-date="" data-date-format="m/d/yyyy">
+            <span class = "glyphicon glyphicon-calendar date-cal"></span>
+            <h1 class="food-add-list-nav-heading">Today</h1>  
+            <b class = "caret"></b>
+          </div>
         </div>
 
         <span class = "glyphicon glyphicon-chevron-right right-nav"></span>

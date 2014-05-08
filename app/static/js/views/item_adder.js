@@ -16,7 +16,8 @@ var ItemAdder = Backbone.View.extend({
 
         this.resetForm();
 
-        this.addOnClickErrorRemoval();
+        this.addValidationErrorRemoval();
+        this.makeExercisePicturesClickable();
     }
 
     ,
@@ -29,6 +30,7 @@ var ItemAdder = Backbone.View.extend({
         this.$el.find(".food-adder-input").each(function(i, input) {
             var $i = $(input);
             if ($i.hasClass('date')) {
+                $i.datepicker('setValue', this.defaultDate);
                 $i.find('input').val(this.defaultDate);
             } else {
                 input.value = "";
@@ -39,23 +41,14 @@ var ItemAdder = Backbone.View.extend({
 
     ,
     setDefaultDate: function(dateString) {
+        this.$el.find('.food-adder-input.date').datepicker('setValue', dateString);
         this.$el.find('.food-adder-input.date input').val(dateString);
         this.defaultDate = dateString;
     }
 
     ,
-
-    addOnClickErrorRemoval: function() {
+    addValidationErrorRemoval: function() {
         this.$el.find(".can-be-red").each(function(i, div) {
-
-            // $input = $div.find('.food-adder-input').first();
-            // $input.focus(function() {
-            //     $div.removeClass('has-error');
-            // });
-            // $input.change(function() {
-            //     $div.removeClass('has-error');
-            // });
-
             $(div).find('.food-adder-input').first().focus(function() {
                 $(div).removeClass('has-error');
             });
@@ -63,6 +56,28 @@ var ItemAdder = Backbone.View.extend({
                 $(div).removeClass('has-error');
             });
         });
+    }
+
+    ,
+    makeExercisePicturesClickable: function() {
+        if (this.itemType != 'exercise') return;
+        this.$el.find(".item-adder-default-image").each(function(i, div) {
+            $(div).children().each(function(i, img) {
+                var name = $(img).attr('consumableItem-name');
+                if (name !== undefined) {
+                    $(img).css('cursor', 'pointer');
+                    $(img).click(function() {
+                        item = this.model.filter(function(consumableItem) {
+                            return consumableItem.get("name") === name;
+                        })[0];
+                        this._setItem(item);
+                        $name_inp = this.$el.find(".food-adder-input").first();
+                        $name_inp.val(name);
+                        this.handleAutocompleteClose();
+                    }.bind(this));
+                }
+            }.bind(this));
+        }.bind(this));
     }
 
     ,
@@ -115,7 +130,6 @@ var ItemAdder = Backbone.View.extend({
         }
         if (isNaN(form['calories']) || form['quantity'] === '' || form['name'] === '')
             return;
-        console.log(form);
         return form;
     }
 
@@ -129,6 +143,9 @@ var ItemAdder = Backbone.View.extend({
               onRender: function(date) {
                 return date.valueOf() > now.valueOf() ? 'disabled' : '';
               }
+        })
+        .on('changeDate', function (e) {
+          dateEl.datepicker('hide');
         });
     }
 
