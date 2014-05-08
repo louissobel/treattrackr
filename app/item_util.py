@@ -8,8 +8,7 @@ import mongoengine
 
 from models import ConsumableItem
 
-mongo = os.environ.get('MONGOHQ_URL', 'treattrackr-dev')
-mongoengine.connect(mongo)
+mongoengine.connect('treattrackr-dev', host=os.environ.get('MONGOHQ_URL'))
 
 def die(msg):
     sys.stderr.write(msg + '\n')

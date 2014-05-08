@@ -11,8 +11,7 @@ import models
 app = flask.Flask(__name__)
 app.debug = True
 
-mongo = os.environ.get('MONGOHQ_URL', 'treattrackr-dev')
-mongoengine.connect(mongo)
+mongoengine.connect('treattrackr-dev', host=os.environ.get('MONGOHQ_URL'))
 
 
 def require_user(f):
