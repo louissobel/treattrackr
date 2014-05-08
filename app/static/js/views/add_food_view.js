@@ -85,12 +85,13 @@ var FoodAdderView = Backbone.View.extend({
     });
   }
 
-, showDateOfJustAdded: function (item) {
-    this.dataDateRange.set('start', new Date(item.get('date')));
+, handleItemDeleted: function (item) {
+    var url = "/users/" + TTDATA.user.id + "/history/" + item.id;
+    $.post(url);
   }
 
-, handleItemDeleted: function (item) {
-    // TODO PERSIST THIS TO THE SERVER
+, showDateOfJustAdded: function (item) {
+    this.dataDateRange.set('start', new Date(item.get('date')));
   }
 
 , hideUndo: function () {
