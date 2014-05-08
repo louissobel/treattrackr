@@ -33,9 +33,9 @@ var ConsumedItemTable = Backbone.View.extend({
         _.forEach(itemsForTheDay, this._appendItem.bind(this));
 
         // Update the total calories.
-        // TODO. exercises should be negative......
         var totalCalories = _.reduce(itemsForTheDay, function (runningTotal, item) {
-          return runningTotal + item.get('calories');
+          var multiplier = item.get("item_type") === "food" ? 1 : -1;
+          return runningTotal + multiplier * item.get('calories');
         }, 0);
         this.$el.find('.sum-of-calories').html(totalCalories);
     }
