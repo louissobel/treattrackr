@@ -105,11 +105,19 @@ td.img-cell {
   margin-top:20px;
 }
 
+.item-adder-default-image {
+  height:100%;
+}
+
+.item-adder-other-image {
+  height:100%;
+}
+
 .food-adder-img-holder {
   height:40%;
 }
 
-.food-adder-img-holder > img {
+.food-adder-img-holder img {
   height: 100%;
 }
 
@@ -118,7 +126,11 @@ td.img-cell {
   margin-left: 32.5px;
 }
 
-.exercise-adder-img-holder > img {
+.exercise-adder-img-holder img {
+  height:100%;
+}
+
+.exercise-adder-img-holder .item-adder-default-image img {
   height: 40%;
   float: left;
   margin: 5%;

@@ -144,11 +144,18 @@ var ItemAdder = Backbone.View.extend({
     _setImageToItem: function(consumableItem) {
         var src;
         if (consumableItem) {
+            // show the other
             src = consumableItem.get('img_url');
+            this.$el.find('.item-adder-other-image')
+              .removeClass('hidden')
+              .find('img')
+              .attr('src', src)
+              ;
+            this.$el.find('.item-adder-default-image').addClass('hidden');
         } else {
-            src = ConsumableItem.DEFAULT_IMG_URL;
+          this.$el.find('.item-adder-other-image').addClass('hidden');
+          this.$el.find('.item-adder-default-image').removeClass('hidden');
         }
-        this.$el.find('.food-adder-img-holder img').attr('src', src);
     }
 
 
