@@ -3,13 +3,13 @@ dump and load consumableItems
 """
 import sys
 import json
+import os
 
 import mongoengine
 
 from models import ConsumableItem
 
-# TODO: connect based on envvar for heroku.
-mongoengine.connect('treattrackr-dev')
+mongoengine.connect('treattrackr-dev', host=os.environ.get('MONGOHQ_URL'))
 
 def die(msg):
     sys.stderr.write(msg + '\n')

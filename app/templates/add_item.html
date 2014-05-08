@@ -21,6 +21,16 @@ Add Item
 
 {% block content %}
 
+  <div class="undo-deletion alert alert-warning" style="display:none;">
+    <button type="button" class="close" aria-hidden="true">&times;</button>
+    <div class="undo-button-innards">
+      <script type="text/template" id="undo-deletion-innards-template">
+        You just deleted the <%= item_type %> <%= name %> from <%= date %>.
+        <button type="button" class="undo btn btn-info btn-xs">Undo</button>
+      </script>
+    </div>
+  </div>
+
   <div class="food-adder">
 
     <div class="food-adder-drawer food-adder-component">
@@ -39,9 +49,15 @@ Add Item
 
         <div class="food-adder-form-holder">
           <form action="#">
+            <div class="can-be-red name-div">
             <input name="name" class="food-adder-input form-control input-sm" type="text" placeholder="Food" />
+            </div>
+            <div class="can-be-red quantity-div">
             <input name="quantity" class="food-adder-input form-control input-sm" type="text" placeholder="Quantity" />
-            <input name="calories" class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
+            </div>
+            <div class="can-be-red calories-div">
+              <input name="calories" class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
+            </div>
 
             <div class="food-adder-input input-group input-append date" data-date="" data-date-format="m/d/yyyy">
               <input type="text" class="form-control input-sm" placeholder="Date"></input>
@@ -74,9 +90,15 @@ Add Item
 
         <div class="food-adder-form-holder">
           <form action="#">
-            <input name="name" class="food-adder-input form-control input-sm" type="text" placeholder="Exercise" />
+            <div class="can-be-red name-div">
+              <input name="name" class="food-adder-input form-control input-sm" type="text" placeholder="Exercise" />
+            </div>
+            <div class="can-be-red quantity-div">
             <input name="quantity" class="food-adder-input form-control input-sm" type="text" placeholder="Duration" />
-            <input name="calories" class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
+            </div>
+            <div class="can-be-red calories-div">
+              <input name="calories" class="food-adder-input form-control input-sm" type="text" placeholder="Calories" />
+            </div>
             
             <div class="food-adder-input input-group input-append date" data-date="" data-date-format="m/d/yyyy">
               <input type="text" class="form-control input-sm" placeholder="Date"></input>

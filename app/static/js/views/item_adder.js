@@ -15,6 +15,8 @@ var ItemAdder = Backbone.View.extend({
         this.defaultDate = 'Today';
 
         this.resetForm();
+
+        this.addOnClickErrorRemoval();
     }
 
     ,
@@ -42,11 +44,35 @@ var ItemAdder = Backbone.View.extend({
     }
 
     ,
+
+    addOnClickErrorRemoval: function() {
+        this.$el.find(".can-be-red").each(function(i, div) {
+
+            // $input = $div.find('.food-adder-input').first();
+            // $input.focus(function() {
+            //     $div.removeClass('has-error');
+            // });
+            // $input.change(function() {
+            //     $div.removeClass('has-error');
+            // });
+
+            $(div).find('.food-adder-input').first().focus(function() {
+                $(div).removeClass('has-error');
+            });
+            $(div).find('.food-adder-input').first().change(function() {
+                $(div).removeClass('has-error');
+            });
+        });
+    }
+
+    ,
     newItemAdded: function(e) {
         e.preventDefault();
         var newItem = this._obtainNewItem();
-        this.resetForm();
-        this.trigger('newItem', this.options.itemType, newItem);
+        if (newItem !== undefined) {
+            this.resetForm();
+            this.trigger('newItem', newItem);
+        }
     }
 
     ,
@@ -65,18 +91,32 @@ var ItemAdder = Backbone.View.extend({
                 }
                 form['date'] = moment(dateString).valueOf();
             } else if (input.name === 'calories') {
-                form[input.name] = parseInt(input.value, 10);
+                // Validation
+                if (isNaN(input.value) || input.value == "") {
+                    form[input.name] = NaN;
+                    this.$el.find(".calories-div").first().addClass('has-error');
+                } else {
+                    form[input.name] = parseInt(input.value, 10);
+                }
             } else {
                 form[input.name] = input.value;
+                if (input.name === 'quantity' && input.value === '') {
+                    this.$el.find(".quantity-div").first().addClass('has-error');
+                }
+                if (input.name === 'name' && input.value === '') {
+                    this.$el.find(".name-div").first().addClass('has-error');
+                }
             }
-        });
+        }.bind(this));
 
         if (this._selectedItem) {
             // Should be a `merge` method
             form['img_url'] = this._selectedItem.get("img_url")
         }
+        if (isNaN(form['calories']) || form['quantity'] === '' || form['name'] === '')
+            return;
         console.log(form);
-        return form
+        return form;
     }
 
     ,
@@ -136,7 +176,9 @@ var ItemAdder = Backbone.View.extend({
         // do nothgin
         if (this._selectedItem) {
             this.$el.find('.food-adder-input[name=quantity]').val(this._selectedItem.get("default_quantity"));
+            this.$el.find('.food-adder-input[name=quantity]').change(); // Clears the .has-error class
             this.$el.find('.food-adder-input[name=calories]').val(this._selectedItem.get("default_calories"));
+            this.$el.find('.food-adder-input[name=calories]').change(); // Clears the .has-error class
             this.$el.find('.food-adder-submit').focus();
         }
     }
