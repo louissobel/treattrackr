@@ -1,11 +1,13 @@
 /* ConsumedItem Model */
 
 var ConsumedItem = Backbone.Model.extend({
-    defaults: function() {
-        return {
-            img_url: "static/img/food.png",
-            name: "Koala",
-            calories: 123
-        }
-    }
-});
+
+        initialize: function() {
+            console.log(this;
+                if (this.get('item_type') == 'food') {
+                    this.set('item_type', '/static/img/food.png');
+                } else {
+                    this.set('item_type', '/static/img/exercise.png');
+                }
+            }
+        });
