@@ -8,8 +8,8 @@ import mongoengine
 
 from models import ConsumableItem
 
-# TODO: connect based on envvar for heroku.
-mongoengine.connect('treattrackr-dev')
+mongo = os.environ.get('MONGOHQ_URL', 'treattrackr-dev')
+mongoengine.connect(mongo)
 
 def die(msg):
     sys.stderr.write(msg + '\n')

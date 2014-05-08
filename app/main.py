@@ -11,8 +11,8 @@ import models
 app = flask.Flask(__name__)
 app.debug = True
 
-# TODO: connect based on envvar for heroku.
-mongoengine.connect('treattrackr-dev')
+mongo = os.environ.get('MONGOHQ_URL', 'treattrackr-dev')
+mongoengine.connect(mongo)
 
 
 def require_user(f):
