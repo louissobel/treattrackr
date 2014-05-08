@@ -30,6 +30,7 @@ var ItemAdder = Backbone.View.extend({
         this.$el.find(".food-adder-input").each(function(i, input) {
             var $i = $(input);
             if ($i.hasClass('date')) {
+                $i.datepicker('setValue', this.defaultDate);
                 $i.find('input').val(this.defaultDate);
             } else {
                 input.value = "";
@@ -40,6 +41,7 @@ var ItemAdder = Backbone.View.extend({
 
     ,
     setDefaultDate: function(dateString) {
+        this.$el.find('.food-adder-input.date').datepicker('setValue', dateString);
         this.$el.find('.food-adder-input.date input').val(dateString);
         this.defaultDate = dateString;
     }
@@ -141,6 +143,9 @@ var ItemAdder = Backbone.View.extend({
               onRender: function(date) {
                 return date.valueOf() > now.valueOf() ? 'disabled' : '';
               }
+        })
+        .on('changeDate', function (e) {
+          dateEl.datepicker('hide');
         });
     }
 
