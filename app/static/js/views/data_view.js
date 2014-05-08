@@ -16,6 +16,7 @@ var DataView = Backbone.View.extend({
 
     this.dataGraphsContainer = new DataGraphsContainer({
       dataDateRange: dataDateRange
+    , model: window.TTDATA.history
     });
   }
 
