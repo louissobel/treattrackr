@@ -24,7 +24,15 @@ var ItemAdder = Backbone.View.extend({
 
     ,
     resetForm: function () {
-        this.$el.find('.food-adder-input.date input').val(this.defaultDate);
+      this.$el.find(".food-adder-input").each(function(i, input) {
+          var $i = $(input);
+          if ($i.hasClass('date')) {
+              $i.find('input').val(this.defaultDate);
+          } else {
+            input.value = "";
+          }
+      }.bind(this));
+      this._setItem(null);
     }
 
     ,
@@ -37,6 +45,7 @@ var ItemAdder = Backbone.View.extend({
     newItemAdded: function(e) {
         e.preventDefault();
         var newItem = this._obtainNewItem();
+        this.resetForm();
         this.trigger('newItem', this.options.itemType, newItem);
     }
 
