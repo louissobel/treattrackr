@@ -6,7 +6,7 @@ var ItemAdder = Backbone.View.extend({
         this.options = options || {};
         this.itemType = options.itemType;
         if (!this.itemType) {
-          throw new Error("No item type provided to itemAdder");
+            throw new Error("No item type provided to itemAdder");
         }
 
         // Set up for date picker
@@ -23,22 +23,22 @@ var ItemAdder = Backbone.View.extend({
     }
 
     ,
-    resetForm: function () {
-      this.$el.find(".food-adder-input").each(function(i, input) {
-          var $i = $(input);
-          if ($i.hasClass('date')) {
-              $i.find('input').val(this.defaultDate);
-          } else {
-            input.value = "";
-          }
-      }.bind(this));
-      this._setItem(null);
+    resetForm: function() {
+        this.$el.find(".food-adder-input").each(function(i, input) {
+            var $i = $(input);
+            if ($i.hasClass('date')) {
+                $i.find('input').val(this.defaultDate);
+            } else {
+                input.value = "";
+            }
+        }.bind(this));
+        this._setItem(null);
     }
 
     ,
-    setDefaultDate: function (dateString) {
-      this.$el.find('.food-adder-input.date input').val(dateString);
-      this.defaultDate = dateString;
+    setDefaultDate: function(dateString) {
+        this.$el.find('.food-adder-input.date input').val(dateString);
+        this.defaultDate = dateString;
     }
 
     ,
@@ -54,18 +54,18 @@ var ItemAdder = Backbone.View.extend({
         // Get it from the form :/
         // Augment it from model if we have one
         var form = {
-          item_type: this.itemType
+            item_type: this.itemType
         };
         this.$el.find(".food-adder-input").each(function(i, input) {
             var $i = $(input);
             if ($i.hasClass('date')) {
                 var dateString = $i.find('input').val();
                 if (dateString === 'Today') {
-                  dateString = moment().format('MM/DD/YYYY')
+                    dateString = moment().format('MM/DD/YYYY')
                 }
                 form['date'] = moment(dateString).valueOf();
             } else if (input.name === 'calories') {
-              form[input.name] = parseInt(input.value, 10);
+                form[input.name] = parseInt(input.value, 10);
             } else {
                 form[input.name] = input.value;
             }
@@ -98,8 +98,8 @@ var ItemAdder = Backbone.View.extend({
 
     ,
     autocompleteSource: function(request, response) {
-        var regexp = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i")
-          , results = this.model.filter(function(consumableItem) {
+        var regexp = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i"),
+            results = this.model.filter(function(consumableItem) {
                 return regexp.test(consumableItem.get("name")) && consumableItem.get("item_type") == this.itemType;
             }.bind(this));
         response(results.map(function(consumableItem) {
