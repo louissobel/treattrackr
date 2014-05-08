@@ -16,7 +16,8 @@ var ItemAdder = Backbone.View.extend({
 
         this.resetForm();
 
-        this.addOnClickErrorRemoval();
+        this.addValidationErrorRemoval();
+        this.makeExercisePicturesClickable();
     }
 
     ,
@@ -44,18 +45,8 @@ var ItemAdder = Backbone.View.extend({
     }
 
     ,
-
-    addOnClickErrorRemoval: function() {
+    addValidationErrorRemoval: function() {
         this.$el.find(".can-be-red").each(function(i, div) {
-
-            // $input = $div.find('.food-adder-input').first();
-            // $input.focus(function() {
-            //     $div.removeClass('has-error');
-            // });
-            // $input.change(function() {
-            //     $div.removeClass('has-error');
-            // });
-
             $(div).find('.food-adder-input').first().focus(function() {
                 $(div).removeClass('has-error');
             });
@@ -63,6 +54,28 @@ var ItemAdder = Backbone.View.extend({
                 $(div).removeClass('has-error');
             });
         });
+    }
+
+    ,
+    makeExercisePicturesClickable: function() {
+        if (this.itemType != 'exercise') return;
+        this.$el.find(".item-adder-default-image").each(function(i, div) {
+            $(div).children().each(function(i, img) {
+                var name = $(img).attr('consumableItem-name');
+                if (name !== undefined) {
+                    $(img).css('cursor', 'pointer');
+                    $(img).click(function() {
+                        item = this.model.filter(function(consumableItem) {
+                            return consumableItem.get("name") === name;
+                        })[0];
+                        this._setItem(item);
+                        $name_inp = this.$el.find(".food-adder-input").first();
+                        $name_inp.val(name);
+                        this.handleAutocompleteClose();
+                    }.bind(this));
+                }
+            }.bind(this));
+        }.bind(this));
     }
 
     ,
@@ -115,7 +128,6 @@ var ItemAdder = Backbone.View.extend({
         }
         if (isNaN(form['calories']) || form['quantity'] === '' || form['name'] === '')
             return;
-        console.log(form);
         return form;
     }
 
