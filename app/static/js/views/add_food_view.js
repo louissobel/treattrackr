@@ -21,6 +21,7 @@ var FoodAdderView = Backbone.View.extend({
     this.listenTo(this.consumedItems, 'add', this.persistNewItem);
     this.listenTo(this.consumedItems, 'add', this.showDateOfJustAdded);
     this.listenTo(this.consumedItems, 'delete', this.handleItemDeleted);
+    this.listenTo(this.dataDateRange, 'change', this.dateChanged);
 
     // Two ItemAdders, one for food, one for exercise
     $('.food-adder-section').each(function (i, e) {
@@ -42,6 +43,21 @@ var FoodAdderView = Backbone.View.extend({
 
   }
 
+, dateChanged: function () {
+    // When the date we're showing changes, have the item adders
+    // update their default date.
+    var dateString
+      , now = new Date()
+      , showing = this.dataDateRange.get("start")
+      ;
+    if (now.getYear() === showing.getYear() && now.getMonth() === showing.getMonth() && now.getDate() === showing.getDate()) {
+      dateString = 'Today';
+    } else {
+      dateString = moment(this.dataDateRange.get("start")).format("M/D/YYYY");
+    }
+    this.foodAdder.setDefaultDate(dateString);
+    this.exerciseAdder.setDefaultDate(dateString);
+  }
 
 , itemAdded: function (itemType, item) {
     this.consumedItems.add(item);

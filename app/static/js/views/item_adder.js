@@ -12,11 +12,25 @@ var ItemAdder = Backbone.View.extend({
         // Set up for date picker
         this.setUpDatePicker();
         this.setUpAutoComplete();
+        this.defaultDate = 'Today';
+
+        this.resetForm();
     }
 
     ,
     events: {
         "click .food-adder-submit": "newItemAdded",
+    }
+
+    ,
+    resetForm: function () {
+        this.$el.find('.food-adder-input.date input').val(this.defaultDate);
+    }
+
+    ,
+    setDefaultDate: function (dateString) {
+      this.$el.find('.food-adder-input.date input').val(dateString);
+      this.defaultDate = dateString;
     }
 
     ,
@@ -60,7 +74,6 @@ var ItemAdder = Backbone.View.extend({
     setUpDatePicker: function() {
         var dateEl = this.$el.find('.food-adder-input.date');
         dateEl.datepicker();
-        dateEl.find('input').val('Today');
     }
 
     ,
